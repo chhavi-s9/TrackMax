@@ -183,7 +183,7 @@ export function CorridorDiagram() {
           const p = train ? trainPoint(train) : sectionGeom(c.sectionId);
           if (!p) return null;
           const x = "x" in p ? p.x : (p.x1 + p.x2) / 2;
-          const y = "y" in p ? p.y - 28 : p.y - 28;
+          const y = p.y - 28;
           const active = isSelected(selected, "conflict", c.id);
           return (
             <g key={c.id} onClick={(e) => { e.stopPropagation(); pick({ kind: "conflict", id: c.id })(); }} style={{ cursor: "pointer" }}>

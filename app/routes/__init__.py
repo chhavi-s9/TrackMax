@@ -10,6 +10,7 @@ from app.routes.scenarios import router as scenarios_router
 from app.routes.schedules import router as schedules_router
 from app.routes.trains import router as trains_router
 from app.routes.weather import router as weather_router
+from app.routes.raildoot_compat import router as raildoot_compat_router
 
 ALL_ROUTERS = [
     departments_router,
@@ -24,4 +25,5 @@ ALL_ROUTERS = [
     optimizer_router,
     scenarios_router,
     weather_router,
+    raildoot_compat_router,
 ]
