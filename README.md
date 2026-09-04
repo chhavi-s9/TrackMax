@@ -42,9 +42,6 @@ DATABASE_URL=mysql+pymysql://USERNAME:PASSWORD@localhost:3306/railway_block_plan
 python -m pip install -r requirements.txt
 ```
 
-On this Windows machine Anaconda `Scripts` may not be on `PATH`. Use:
-
-`C:\Users\uk_just_KD\anaconda3\python.exe -m pip install -r requirements.txt`
 
 3. Create the database schema:
 
