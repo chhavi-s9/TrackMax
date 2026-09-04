@@ -1,0 +1,51 @@
+{
+  "source_system": "TMS",
+  "note": "Synthetic Track Management System defects for SIH demo. Not live IR data.",
+  "defects": [
+    {
+      "task_code": "TMS-JP-AII-001",
+      "section": "JP-AII",
+      "asset_code": "TRK-JP-AII-12",
+      "task_type": "track inspection",
+      "description": "Track inspection after reported alignment variation near km 18",
+      "priority": "HIGH",
+      "duration_minutes": 120
+    },
+    {
+      "task_code": "TMS-JP-AII-002",
+      "section": "JP-AII",
+      "asset_code": "TRK-JP-AII-18",
+      "task_type": "drainage",
+      "description": "Drainage clearing at cutting to reduce track stability risk",
+      "priority": "CRITICAL",
+      "duration_minutes": 150
+    },
+    {
+      "task_code": "TMS-JP-GAD-001",
+      "section": "JP-GAD",
+      "asset_code": "TRK-JP-GAD-04",
+      "task_type": "rail grinding",
+      "description": "Rail grinding on curve km 7-9",
+      "priority": "MEDIUM",
+      "duration_minutes": 180
+    },
+    {
+      "task_code": "TMS-AII-MJ-001",
+      "section": "AII-MJ",
+      "asset_code": "TRK-AII-MJ-09",
+      "task_type": "track stability",
+      "description": "Embankment and track stability check",
+      "priority": "HIGH",
+      "duration_minutes": 90
+    },
+    {
+      "task_code": "TMS-JP-BKI-001",
+      "section": "JP-BKI",
+      "asset_code": "TRK-JP-BKI-03",
+      "task_type": "track buckling inspection",
+      "description": "Rail temperature-related buckling risk inspection",
+      "priority": "HIGH",
+      "duration_minutes": 90
+    }
+  ]
+}

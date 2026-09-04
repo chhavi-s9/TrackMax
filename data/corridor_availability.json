@@ -1,0 +1,21 @@
+{
+  "note": "Synthetic corridor availability windows for SIH demo. Not live COA/TMS data.",
+  "corridors": [
+    {
+      "section": "JP-AII",
+      "typical_quiet_windows": ["01:00-04:30", "13:00-15:00", "22:30-23:50"]
+    },
+    {
+      "section": "JP-GAD",
+      "typical_quiet_windows": ["00:30-04:00", "14:00-16:00"]
+    },
+    {
+      "section": "AII-MJ",
+      "typical_quiet_windows": ["01:30-05:00", "12:30-14:30"]
+    },
+    {
+      "section": "JP-BKI",
+      "typical_quiet_windows": ["02:00-05:00", "15:00-17:00"]
+    }
+  ]
+}

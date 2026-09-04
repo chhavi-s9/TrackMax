@@ -1,0 +1,10 @@
+{
+  "weather_type": "NORMAL",
+  "note": "Synthetic weather scenario for SIH demo.",
+  "sections": [
+    {"section": "JP-AII", "date": "2026-09-05", "severity": 5, "rainfall": 0, "temperature": 32, "visibility": 8, "description": "Clear, dry"},
+    {"section": "JP-GAD", "date": "2026-09-05", "severity": 5, "rainfall": 0, "temperature": 33, "visibility": 8, "description": "Clear"},
+    {"section": "AII-MJ", "date": "2026-09-05", "severity": 8, "rainfall": 0, "temperature": 34, "visibility": 7, "description": "Hazy but operationally normal"},
+    {"section": "JP-BKI", "date": "2026-09-05", "severity": 5, "rainfall": 0, "temperature": 31, "visibility": 9, "description": "Clear"}
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "weather_type": "HEAVY_RAIN",
+  "note": "Synthetic weather scenario for SIH demo.",
+  "sections": [
+    {"section": "JP-AII", "date": "2026-09-05", "severity": 75, "rainfall": 48, "temperature": 26, "visibility": 2.5, "description": "Heavy rainfall predicted; drainage and track stability risk up"},
+    {"section": "JP-GAD", "date": "2026-09-05", "severity": 70, "rainfall": 40, "temperature": 26, "visibility": 3, "description": "Sustained rain"},
+    {"section": "AII-MJ", "date": "2026-09-05", "severity": 80, "rainfall": 55, "temperature": 25, "visibility": 2, "description": "Thunderstorm cells with heavy rain"},
+    {"section": "JP-BKI", "date": "2026-09-05", "severity": 65, "rainfall": 35, "temperature": 27, "visibility": 3.5, "description": "Moderate to heavy rain"}
+  ]
+}

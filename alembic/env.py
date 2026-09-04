@@ -5,9 +5,7 @@ from sqlalchemy import engine_from_config, pool
 
 from app.config import get_settings
 from app.database import Base
-
-# Phase 3 will import models here so autogenerate can see metadata:
-# from app import models  # noqa: F401
+from app import models  # noqa: F401  — register metadata for autogenerate
 
 config = context.config
 

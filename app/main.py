@@ -10,6 +10,7 @@ from starlette.requests import Request
 
 from app.config import get_settings
 from app.database import ensure_database, get_db
+from app.routes import ALL_ROUTERS
 
 settings = get_settings()
 
@@ -30,7 +31,7 @@ app = FastAPI(
         "asset availability for train operations. Demo/synthetic data only — "
         "not real Indian Railways operational data."
     ),
-    version="0.1.0",
+    version="0.2.0",
     docs_url="/docs",
     redoc_url="/redoc",
     lifespan=lifespan,
@@ -43,6 +44,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+for router in ALL_ROUTERS:
+    app.include_router(router)
 
 
 @app.exception_handler(SQLAlchemyError)

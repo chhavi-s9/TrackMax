@@ -1,11 +1,12 @@
+from tests.conftest import requires_mysql
 from sqlalchemy import text
 from sqlalchemy.exc import OperationalError, SQLAlchemyError
 
 from app.database import engine, ensure_database
 
 
+@requires_mysql
 def test_mysql_connection() -> None:
-    """Verify SQLAlchemy can reach MySQL and run a trivial query."""
     try:
         ensure_database()
         with engine.connect() as conn:

@@ -1,0 +1,51 @@
+{
+  "source_system": "TDMS",
+  "note": "Synthetic Traction Distribution Management System defects for SIH demo. Not live IR data.",
+  "defects": [
+    {
+      "task_code": "TDMS-JP-AII-001",
+      "section": "JP-AII",
+      "asset_code": "OHE-JP-AII-22",
+      "task_type": "OHE tension check",
+      "description": "OHE/tension checks on stagger near km 22",
+      "priority": "HIGH",
+      "duration_minutes": 90
+    },
+    {
+      "task_code": "TDMS-JP-AII-002",
+      "section": "JP-AII",
+      "asset_code": "OHE-JP-AII-11",
+      "task_type": "electrical insulation",
+      "description": "Electrical insulation checks on isolator",
+      "priority": "MEDIUM",
+      "duration_minutes": 80
+    },
+    {
+      "task_code": "TDMS-JP-GAD-001",
+      "section": "JP-GAD",
+      "asset_code": "OHE-JP-GAD-05",
+      "task_type": "OHE inspection",
+      "description": "Contact wire wear measurement",
+      "priority": "LOW",
+      "duration_minutes": 60
+    },
+    {
+      "task_code": "TDMS-AII-MJ-001",
+      "section": "AII-MJ",
+      "asset_code": "TSS-AII-MJ-01",
+      "task_type": "traction substation",
+      "description": "TSS breaker maintenance",
+      "priority": "HIGH",
+      "duration_minutes": 180
+    },
+    {
+      "task_code": "TDMS-JP-BKI-001",
+      "section": "JP-BKI",
+      "asset_code": "OHE-JP-BKI-08",
+      "task_type": "electrical insulation",
+      "description": "Section insulator inspection",
+      "priority": "MEDIUM",
+      "duration_minutes": 70
+    }
+  ]
+}

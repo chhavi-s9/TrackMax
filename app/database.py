@@ -12,7 +12,7 @@ _DB_NAME_RE = re.compile(r"^[A-Za-z0-9_]+$")
 
 
 class Base(DeclarativeBase):
-    """Declarative base for SQLAlchemy 2.x models (added in Phase 3)."""
+    """Declarative base for SQLAlchemy 2.x models."""
 
 
 def _build_engine(url: str) -> Engine:
@@ -49,8 +49,7 @@ def get_db() -> Generator[Session, None, None]:
 def ensure_database() -> None:
     """Create the application database if it does not already exist.
 
-    Connects to the MySQL system schema so the app database can be created
-    on a fresh install. Safe to call on every startup.
+    MySQL 5.0 compatible: utf8 (3-byte), no utf8mb4.
     """
     url = make_url(get_settings().database_url)
     db_name = url.database
@@ -61,7 +60,6 @@ def ensure_database() -> None:
     admin_engine = _build_engine(admin_url.render_as_string(hide_password=False))
     try:
         with admin_engine.begin() as conn:
-            # MySQL 5.0: utf8 (3-byte). Avoid utf8mb4 / DATETIME(6) / JSON.
             conn.execute(
                 text(
                     f"CREATE DATABASE IF NOT EXISTS `{db_name}` "

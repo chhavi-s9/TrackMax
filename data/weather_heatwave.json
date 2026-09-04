@@ -1,0 +1,10 @@
+{
+  "weather_type": "HEATWAVE",
+  "note": "Synthetic weather scenario for SIH demo.",
+  "sections": [
+    {"section": "JP-AII", "date": "2026-09-05", "severity": 60, "rainfall": 0, "temperature": 44, "visibility": 6, "description": "Heatwave; rail temperature and OHE tension risk"},
+    {"section": "JP-GAD", "date": "2026-09-05", "severity": 58, "rainfall": 0, "temperature": 43, "visibility": 6, "description": "Hot and dry"},
+    {"section": "AII-MJ", "date": "2026-09-05", "severity": 62, "rainfall": 0, "temperature": 45, "visibility": 5, "description": "Extreme heat"},
+    {"section": "JP-BKI", "date": "2026-09-05", "severity": 55, "rainfall": 0, "temperature": 42, "visibility": 6, "description": "Heatwave conditions"}
+  ]
+}
