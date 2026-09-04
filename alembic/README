@@ -1,0 +1,6 @@
+Alembic migrations for the SIH block-planning backend.
+
+Phase 3 will generate the initial schema with:
+
+    python -m alembic revision --autogenerate -m "initial schema"
+    python -m alembic upgrade head
