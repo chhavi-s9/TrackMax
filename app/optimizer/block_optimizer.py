@@ -1,4 +1,3 @@
-from collections import defaultdict
 from datetime import datetime
 from typing import Optional
 
@@ -20,7 +19,7 @@ _STATUS = {
     cp_model.FEASIBLE: "FEASIBLE",
     cp_model.INFEASIBLE: "INFEASIBLE",
     cp_model.MODEL_INVALID: "INFEASIBLE",
-    cp_model.UNKNOWN: "INFEASIBLE",
+    cp_model.UNKNOWN: "UNKNOWN",
 }
 
 
@@ -39,7 +38,6 @@ def solve_block_plan(
 
     model = cp_model.CpModel()
     x: dict[tuple[int, int, int], cp_model.IntVar] = {}
-    usable: dict[int, list[tuple[int, int]]] = defaultdict(list)
 
     for t_idx, task in enumerate(tasks):
         for w_idx, window in enumerate(windows):
@@ -54,7 +52,6 @@ def solve_block_plan(
                     continue
                 var = model.NewBoolVar(f"t{t_idx}_w{w_idx}_r{r_idx}")
                 x[t_idx, w_idx, r_idx] = var
-                usable[t_idx].append((w_idx, r_idx))
 
     if not x:
         return SolveResult(
@@ -139,14 +136,16 @@ def solve_block_plan(
     result = solver.Solve(model)
     status = _STATUS.get(result, "INFEASIBLE")
 
-    if status == "INFEASIBLE":
+    if status in {"INFEASIBLE", "UNKNOWN"}:
         return SolveResult(
-            status="INFEASIBLE",
+            status=status,
             infeasible_reason=(
+                "CP-SAT could not produce a valid assignment within the solver result."
+                if status == "UNKNOWN" else
                 "CP-SAT found no assignment that satisfies duration, window bounds, "
                 "train conflicts, existing blocks, and resource availability."
             ),
-            reasoning=["Solver status: INFEASIBLE. Hard constraints were not relaxed."],
+            reasoning=[f"Solver status: {status}. Hard constraints were not relaxed."],
         )
 
     assignments = []

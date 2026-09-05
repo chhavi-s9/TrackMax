@@ -17,6 +17,7 @@ class Settings(BaseSettings):
     database_url: str
     app_name: str = "Railway Block Planning API"
     debug: bool = False
+    auto_create_database: bool = True
 
     # Soft-objective weights for the OR-Tools scheduler (not ML).
     weight_critical_completed: float = 25.0

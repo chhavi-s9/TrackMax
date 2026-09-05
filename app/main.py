@@ -9,7 +9,7 @@ from sqlalchemy.orm import Session
 from starlette.requests import Request
 
 from app.config import get_settings
-from app.database import ensure_database, get_db
+from app.database import ensure_database, get_db, initialize_database
 from app.routes import ALL_ROUTERS
 
 settings = get_settings()
@@ -17,11 +17,18 @@ settings = get_settings()
 
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
+    if settings.auto_create_database:
+        try:
+            ensure_database()
+        except (SQLAlchemyError, ValueError) as exc:
+            raise RuntimeError("Could not connect to MySQL or create the application database.") from exc
     try:
-        ensure_database()
-    except SQLAlchemyError as exc:
-        raise RuntimeError("Could not connect to MySQL or create the application database.") from exc
-    yield
+        initialize_database()
+        yield
+    finally:
+        # SQLAlchemy engines are intentionally disposed on shutdown when initialized.
+        from app.database import dispose_engine
+        dispose_engine()
 
 
 app = FastAPI(
@@ -31,7 +38,7 @@ app = FastAPI(
         "asset availability for train operations. Demo/synthetic data only — "
         "not real Indian Railways operational data."
     ),
-    version="0.2.0",
+    version="0.2.1",
     docs_url="/docs",
     redoc_url="/redoc",
     lifespan=lifespan,
@@ -40,7 +47,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )

@@ -16,29 +16,28 @@ class Base(DeclarativeBase):
 
 
 def _build_engine(url: str) -> Engine:
-    return create_engine(
-        url,
-        pool_pre_ping=True,
-        pool_recycle=3600,
-        future=True,
-    )
+    return create_engine(url, pool_pre_ping=True, pool_recycle=3600, future=True)
 
 
 def get_engine() -> Engine:
     return _build_engine(get_settings().database_url)
 
 
-engine = get_engine()
-SessionLocal = sessionmaker(
-    bind=engine,
-    autoflush=False,
-    autocommit=False,
-    expire_on_commit=False,
-    class_=Session,
-)
+# Lazy engine creation prevents importing the app from requiring a live DB immediately.
+engine: Engine | None = None
+SessionLocal: sessionmaker[Session] | None = None
+
+
+def initialize_database() -> None:
+    global engine, SessionLocal
+    if engine is None:
+        engine = get_engine()
+        SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False, expire_on_commit=False, class_=Session)
 
 
 def get_db() -> Generator[Session, None, None]:
+    initialize_database()
+    assert SessionLocal is not None
     db = SessionLocal()
     try:
         yield db
@@ -47,24 +46,23 @@ def get_db() -> Generator[Session, None, None]:
 
 
 def ensure_database() -> None:
-    """Create the application database if it does not already exist.
-
-    MySQL 5.0 compatible: utf8 (3-byte), no utf8mb4.
-    """
+    """Create the configured MySQL database if it does not exist."""
     url = make_url(get_settings().database_url)
     db_name = url.database
     if not db_name or not _DB_NAME_RE.fullmatch(db_name):
         raise ValueError("DATABASE_URL must include a valid database name")
-
     admin_url = url.set(database="mysql")
     admin_engine = _build_engine(admin_url.render_as_string(hide_password=False))
     try:
         with admin_engine.begin() as conn:
-            conn.execute(
-                text(
-                    f"CREATE DATABASE IF NOT EXISTS `{db_name}` "
-                    "CHARACTER SET utf8 COLLATE utf8_general_ci"
-                )
-            )
+            conn.execute(text(f"CREATE DATABASE IF NOT EXISTS `{db_name}` CHARACTER SET utf8 COLLATE utf8_general_ci"))
     finally:
         admin_engine.dispose()
+
+
+def dispose_engine() -> None:
+    global engine, SessionLocal
+    if engine is not None:
+        engine.dispose()
+    engine = None
+    SessionLocal = None
